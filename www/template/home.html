@@ -1,0 +1,103 @@
+<ion-view title="Home">
+    <ion-side-menus>
+        <ion-side-menu-content>
+            <ion-header-bar class="bar-positive">
+                <button class="button button-icon" ng-click="catSearchMenu()" ng-hide="$exposeAside.active">
+                    <i class="icon ion-ios-browsers-outline"></i>
+                </button>
+                <h1 class="title">TripSearch</h1>
+                <button class="button button-icon" ng-click="openSetting()">
+                    <i class="icon ion-ios-gear-outline"></i>
+                </button>
+            </ion-header-bar>
+
+            <ion-content scroll="true">
+                <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+                <!--主页内容-->
+                <!--头部空白-->
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+                <!--logo位置-->
+                <div class="row">
+                    <div class="col text-center">
+                        <img src="./assets/images/logo-icon.png">
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col"></div>
+                </div>
+                <!--搜索框-->
+                <div class="row">
+                    <div class="col col-10"></div>
+                    <div class="col">
+                        <label class="item item-input">
+                            <i class="icon ion-search placeholder-icon"></i>
+                            <input type="text" ng-model="search.content" ng-click="openSearch()" placeholder="搜索景点">
+                        </label>
+                    </div>
+                    <div class="col col-10"></div>
+                </div>
+                <div class="row" >
+                    <div class="col"></div>
+                </div>
+                <!--随机景点位置-->
+
+
+                <!--附近景点推荐-->
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                <label >
+                                    附近热门景点推荐
+                                    <button  ng-click="openLocation()" style="float: right;" class="button icon-left ion-pinpoint button-clear button-positive button-small"><!--<i class="icon ion-pinpoint"></i>--> 定位</button>
+                                </label>
+                            </div>
+                            <div class="list">
+
+                                <a ng-repeat="sight in nsResults.sights" class="item" nav-direction="enter" href="#/sightDetail/near/{{sight.id}}">
+                                    <h2>{{sight.name}} <i style="float: right;font-size: 12px">{{sight._dist_ | distance}}&nbsp;&nbsp;评分: {{sight.score}}</i></h2>
+                                    <p>简介:{{sight.intro | offhtml}}</p>
+                                </a>
+                                <div style="width: 100%;padding-left: 45%">
+                                    <ion-spinner icon="spiral" ng-hide="hidespinner"></ion-spinner>
+                                </div>
+
+                            </div>
+                            <div class="item item-divider">
+                                <button class="button button-outline button-positive button-small"   ng-click="nearSight(nsResults.nowPage+1)">加载更多</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--搜索引擎状态-->
+                <div class="row">
+                    <div class="col text-center">
+                        搜索引擎状态
+                    </div>
+                </div>
+
+            </ion-content>
+
+        </ion-side-menu-content>
+
+        <ion-side-menu side="left" expose-aside-when="large">
+            <ion-header-bar class="bar-positive">
+                <h1 class="title">其他</h1>
+            </ion-header-bar>
+            <ion-content scroll="false">
+                <ion-list>
+                    <ion-item>
+                        随机景点
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+
+        </ion-side-menu>
+    </ion-side-menus>
+</ion-view>
+<!--<ion-view>标签下面必须有一个元素,否则会产生VIEW abstractView none null异常,也就是当前的view为null,不能写入$ionicHistory-->
+<script></script>
